@@ -9,6 +9,7 @@
     "lint": "eslint"
   },
   "type": "module",
+  "packageManager": "pnpm@11.7.0",
   "dependencies": {
     "@types/react": "^19.2.7",
     "axios": "^1.12.2",
