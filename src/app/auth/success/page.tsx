@@ -1,7 +1,7 @@
 "use client";
-import {useEffect} from "react";
-import {useRouter} from "next/navigation";
-import {useSession} from "next-auth/react";
+import { useRouter } from "next/navigation";
+import { useSession } from "next-auth/react";
+import { useEffect } from "react";
 
 const AuthSuccess = () => {
   const { data: session } = useSession();
@@ -13,9 +13,7 @@ const AuthSuccess = () => {
     }
   }, [session, router]);
 
-  return <div>
-    Success
-  </div>;
+  return <div>Success</div>;
 };
 
 export default AuthSuccess;

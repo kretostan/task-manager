@@ -5,15 +5,15 @@
   margin: 0;
   padding: 0;
 
-  --neutral: #1E1E1E;
+  --neutral: #1e1e1e;
   --background: #121212;
-  --primary: #BB86FC;
-  --secondary: #673AB7;
-  --tertiary: #3F51B5;
-  --text: #E0E0E0;
-  --warning: #CF6679;
-  --warning-1: #FF5252;
-  --success: #00C853;
+  --primary: #bb86fc;
+  --secondary: #673ab7;
+  --tertiary: #3f51b5;
+  --text: #e0e0e0;
+  --warning: #cf6679;
+  --warning-1: #ff5252;
+  --success: #00c853;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -22,7 +22,7 @@
 }
 
 body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   background-color: var(--background);
   color: #fff;
   line-height: 1.6;
@@ -43,7 +43,8 @@ body {
   @keyframes shimmer {
     from {
       background-position-x: -200%;
-    } to {
+    }
+    to {
       background-position-x: 200%;
     }
   }
@@ -51,22 +52,38 @@ body {
 }
 
 /* Texts gradients */
-.logo-gradient, .title-gradient {
-  background: linear-gradient(to bottom right, var(--primary) 0%, var(--secondary) 100%);
+.logo-gradient,
+.title-gradient {
+  background: linear-gradient(
+    to bottom right,
+    var(--primary) 0%,
+    var(--secondary) 100%
+  );
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
 .hero-gradient {
-  background: linear-gradient(to bottom right, var(--primary) 0%, var(--secondary) 33%, var(--tertiary) 66%);
+  background: linear-gradient(
+    to bottom right,
+    var(--primary) 0%,
+    var(--secondary) 33%,
+    var(--tertiary) 66%
+  );
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
 .top-gradient {
-  border-image: linear-gradient(to bottom right, var(--primary) 0%, var(--secondary) 33%, var(--tertiary) 66%) 1;
+  border-image: linear-gradient(
+      to bottom right,
+      var(--primary) 0%,
+      var(--secondary) 33%,
+      var(--tertiary) 66%
+    )
+    1;
 }
 
 .gradient-auth::before {
@@ -76,7 +93,14 @@ body {
   left: 0;
   height: 3px;
   width: 100%;
-  background: linear-gradient(to right, var(--primary), var(--secondary), var(--tertiary), var(--secondary), var(--primary));
+  background: linear-gradient(
+    to right,
+    var(--primary),
+    var(--secondary),
+    var(--tertiary),
+    var(--secondary),
+    var(--primary)
+  );
   background-size: 300% 100%;
   animation: move 3s linear infinite;
 }
@@ -91,7 +115,13 @@ body {
 }
 
 .shimmer-text {
-  background: linear-gradient(to bottom right, var(--primary) 0%, var(--secondary) 33%, var(--tertiary) 66%, var(--primary) 100%);
+  background: linear-gradient(
+    to bottom right,
+    var(--primary) 0%,
+    var(--secondary) 33%,
+    var(--tertiary) 66%,
+    var(--primary) 100%
+  );
   animation: shimmer 1.25s infinite;
   -webkit-background-clip: text;
   background-clip: text;
@@ -112,7 +142,11 @@ body {
 .bg-orb {
   position: absolute;
   border-radius: 50%;
-  background: linear-gradient(135deg, rgba(187, 134, 252, 0.1), rgba(103, 58, 183, 0.1));
+  background: linear-gradient(
+    135deg,
+    rgba(187, 134, 252, 0.1),
+    rgba(103, 58, 183, 0.1)
+  );
   animation: float 8s ease-in-out infinite;
   filter: blur(40px);
 }
@@ -143,9 +177,16 @@ body {
 }
 
 @keyframes float {
-  0%, 100% { transform: translateY(0) rotate(0deg) scale(1); }
-  33% { transform: translateY(-30px) rotate(120deg) scale(1.1); }
-  66% { transform: translateY(20px) rotate(240deg) scale(0.9); }
+  0%,
+  100% {
+    transform: translateY(0) rotate(0deg) scale(1);
+  }
+  33% {
+    transform: translateY(-30px) rotate(120deg) scale(1.1);
+  }
+  66% {
+    transform: translateY(20px) rotate(240deg) scale(0.9);
+  }
 }
 
 /* Button animation */
@@ -159,7 +200,7 @@ body {
   background: linear-gradient(
     to right,
     transparent 0%,
-    rgba(255,255,255) 50%,
+    rgba(255, 255, 255) 50%,
     transparent 100%
   );
   opacity: 0.2;
@@ -229,8 +270,8 @@ body {
 }
 
 input:-webkit-autofill {
-  -webkit-box-shadow: 0 0 0 100px var(--secondary) inset !important;
-  -webkit-text-fill-color: var(--text) !important;
+  -webkit-box-shadow: 0 0 0 100px var(--secondary) inset;
+  -webkit-text-fill-color: var(--text);
   outline-color: var(--primary);
 }
 
@@ -258,10 +299,24 @@ input[type="checkbox"]:checked::before {
 
 progress[value]::-moz-progress-bar {
   background-image:
-    -moz-linear-gradient(135deg, transparent 33%, rgba(0, 0, 0, 0.1) 33%, rgba(0, 0, 0, 0.1) 66%, transparent 66%),
+    -moz-linear-gradient(
+      135deg,
+      transparent 33%,
+      rgba(0, 0, 0, 0.1) 33%,
+      rgba(0, 0, 0, 0.1) 66%,
+      transparent 66%
+    ),
     -moz-linear-gradient(top, rgba(255, 255, 255, 0.25), rgba(0, 0, 0, 0.25)),
-    -moz-linear-gradient(left, var(--primary), var(--secondary), var(--tertiary));
+    -moz-linear-gradient(
+      left,
+      var(--primary),
+      var(--secondary),
+      var(--tertiary)
+    );
 
   border-radius: 2px;
-  background-size: 35px 20px, 100% 100%, 100% 100%;
+  background-size:
+    35px 20px,
+    100% 100%,
+    100% 100%;
 }

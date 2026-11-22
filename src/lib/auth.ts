@@ -1,11 +1,11 @@
+import type { NextAuthOptions } from "next-auth";
+import CredentialsProvider from "next-auth/providers/credentials";
+import FacebookProvider from "next-auth/providers/facebook";
 import GitHubProvider from "next-auth/providers/github";
 import GoogleProvider from "next-auth/providers/google";
-import FacebookProvider from "next-auth/providers/facebook";
-import CredentialsProvider from "next-auth/providers/credentials";
-import type {NextAuthOptions} from "next-auth";
-import {connectDB} from "@/lib/database";
-import {User} from "@/models/user";
-import {Task} from "@/models/task";
+import { connectDB } from "@/lib/database";
+import { Task } from "@/models/task";
+import { User } from "@/models/user";
 
 export const authOptions: NextAuthOptions = {
   providers: [
@@ -53,7 +53,7 @@ export const authOptions: NextAuthOptions = {
           password: null,
           provider: account?.provider,
           tasks: [],
-          stats: { total: 0, completed: 0, inProgress: 0, rate: 0 }
+          stats: { total: 0, completed: 0, inProgress: 0, rate: 0 },
         });
         await newUser.save();
       }
@@ -65,11 +65,11 @@ export const authOptions: NextAuthOptions = {
       const user = await User.findOne({ email: session?.user?.email }).exec();
       const tasks = await Task.find({ _id: { $in: user.tasks } }).exec();
 
-      if(session?.user && tasks && user) {
+      if (session?.user && tasks && user) {
         session.user.tasks = JSON.parse(JSON.stringify(tasks));
         session.user.stats = JSON.parse(JSON.stringify(user.stats));
       }
-      return session
+      return session;
     },
   },
   pages: {

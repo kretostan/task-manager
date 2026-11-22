@@ -7,7 +7,10 @@ export const connectDB = async () => {
 
   try {
     await mongoose.connect(MONGO_URI, {
-      dbName: process.env.NODE_ENV === "production" ? "task-manager" : "task-manager-dev",
+      dbName:
+        process.env.NODE_ENV === "production"
+          ? "task-manager"
+          : "task-manager-dev",
     });
     console.log("Connected to database successfully.");
   } catch (error) {

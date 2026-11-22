@@ -1,26 +1,35 @@
-import {motion} from "framer-motion";
-import type {RefObject} from "react";
+import { motion } from "framer-motion";
 import Image from "next/image";
+import type { RefObject } from "react";
 
 type ModalHeaderProps = {
   ref: RefObject<HTMLDialogElement | null>;
   closeModal: (ref: HTMLDialogElement) => void;
-  isEdit: boolean
+  isEdit: boolean;
 };
 
 const ModalHeader = ({ ref, closeModal, isEdit }: ModalHeaderProps) => {
-  return <div className="flex flex-col justify-center gap-4 px-8 pb-6 w-full border-b-1 border-primary/20">
-    <div className="flex justify-between items-center">
-      <h3 className="title-gradient font-semibold text-2xl">{isEdit ? "Update": "Add New"} Task</h3>
-      <motion.button
-        whileHover={{ rotate: 90, backgroundColor: "var(--primary)" }}
-        style={{ backgroundColor: "rgba(187, 134, 252, 0.2)" }}
-        className="flex justify-center items-center h-9 w-9 rounded-[50%] cursor-pointer"
-        onClick={() => ref.current && closeModal(ref.current)}
-      ><Image src="/icons/close.svg" alt="Close" height="15" width="15" /></motion.button>
+  return (
+    <div className="flex flex-col justify-center gap-4 px-8 pb-6 w-full border-b-1 border-primary/20">
+      <div className="flex justify-between items-center">
+        <h3 className="title-gradient font-semibold text-2xl">
+          {isEdit ? "Update" : "Add New"} Task
+        </h3>
+        <motion.button
+          whileHover={{ rotate: 90, backgroundColor: "var(--primary)" }}
+          style={{ backgroundColor: "rgba(187, 134, 252, 0.2)" }}
+          className="flex justify-center items-center h-9 w-9 rounded-[50%] cursor-pointer"
+          onClick={() => ref.current && closeModal(ref.current)}
+        >
+          <Image src="/icons/close.svg" alt="Close" height="15" width="15" />
+        </motion.button>
+      </div>
+      <p className="text-sm text-text/50">
+        {isEdit ? "Update a task" : "Create a new task"} to stay organized and
+        productive
+      </p>
     </div>
-    <p className="text-sm text-text/50">{isEdit ? "Update a task" : "Create a new task"} to stay organized and productive</p>
-  </div>
-}
+  );
+};
 
 export default ModalHeader;

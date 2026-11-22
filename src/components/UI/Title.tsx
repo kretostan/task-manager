@@ -1,9 +1,13 @@
 interface TitleProps {
-    className?: string;
+  className?: string;
 }
 
 const Title = ({ className }: TitleProps) => {
-    return <h1 className={`logo-gradient text-3xl font-bold ${className}`}>TaskManager</h1>
-}
+  return (
+    <h1 className={`logo-gradient text-3xl font-bold ${className}`}>
+      TaskManager
+    </h1>
+  );
+};
 
 export default Title;

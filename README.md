@@ -20,6 +20,26 @@ You can start editing the page by modifying `app/page.tsx`. The page auto-update
 
 This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
+## Code Quality
+
+This project uses [Biome](https://biomejs.dev/) for linting, formatting, and import organization. Configuration is defined in [`biome.json`](./biome.json).
+
+```bash
+# Check lint rules
+pnpm lint
+
+# Check lint rules, formatting, and import organization without modifying files
+pnpm check
+
+# Format files in place
+pnpm format
+
+# Apply safe fixes, formatting, and import organization
+pnpm exec biome check --write .
+```
+
+Run `pnpm check` before opening a pull request.
+
 ## Learn More
 
 To learn more about Next.js, take a look at the following resources:

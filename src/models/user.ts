@@ -1,6 +1,6 @@
-import {Document, Schema, model, models} from "mongoose";
 import bcrypt from "bcryptjs";
-import {IUser} from "@/types/common";
+import { type Document, model, models, Schema } from "mongoose";
+import type { IUser } from "@/types/common";
 
 const userSchema = new Schema<IUser & Document>({
   provider: { type: String, required: true, default: "local" },
@@ -8,10 +8,12 @@ const userSchema = new Schema<IUser & Document>({
   name: { type: String, required: true },
   email: { type: String, required: true, unique: true },
   password: String,
-  tasks: [{
-    type: Schema.Types.ObjectId,
-    ref: "Task",
-  }],
+  tasks: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "Task",
+    },
+  ],
   stats: {
     total: { type: Number, required: true, default: 0 },
     completed: { type: Number, required: true, default: 0 },
