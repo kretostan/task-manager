@@ -1,5 +1,5 @@
-import {DefaultSession} from "next-auth";
-import {IStats, ITask} from "@/types/common";
+import { DefaultSession } from "next-auth";
+import { IStats, ITask } from "@/types/common";
 
 declare module "next-auth" {
   interface Session {
