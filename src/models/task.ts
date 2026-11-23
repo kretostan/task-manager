@@ -1,5 +1,5 @@
-import {Document, Schema, model, models} from "mongoose";
-import {ITask} from "@/types/common";
+import { type Document, model, models, Schema } from "mongoose";
+import type { ITask } from "@/types/common";
 
 const taskSchema = new Schema<ITask & Document>({
   title: { type: String, requited: true },
@@ -10,8 +10,8 @@ const taskSchema = new Schema<ITask & Document>({
   user: {
     type: Schema.Types.ObjectId,
     ref: "User",
-    required: true
-  }
+    required: true,
+  },
 });
 
 export const Task = models.Task || model<ITask & Document>("Task", taskSchema);

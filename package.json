@@ -6,9 +6,12 @@
     "dev": "next dev --turbopack",
     "build": "next build --turbopack",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "biome lint .",
+    "check": "biome check .",
+    "format": "biome format --write ."
   },
   "type": "module",
+  "packageManager": "pnpm@11.7.0",
   "dependencies": {
     "@types/react": "^19.2.7",
     "axios": "^1.12.2",
@@ -22,13 +25,11 @@
     "react-dom": "19.1.0"
   },
   "devDependencies": {
-    "@eslint/eslintrc": "^3",
+    "@biomejs/biome": "2.6.8",
     "@tailwindcss/postcss": "^4",
     "@types/jsonwebtoken": "^9.0.10",
     "@types/node": "^20",
     "@types/react-dom": "^19",
-    "eslint": "^9",
-    "eslint-config-next": "15.5.4",
     "tailwindcss": "^4",
     "typescript": "^5"
   }

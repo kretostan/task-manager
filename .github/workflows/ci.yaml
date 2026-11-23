@@ -1,0 +1,112 @@
+name: CI Pipeline
+
+on:
+  push:
+    branches: [main, develop]
+
+  pull_request:
+    branches: [main, develop]
+
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref}}
+  cancel-in-progress: true
+
+jobs:
+  lint:
+    name: Biome check
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out the code
+        uses: actions/checkout@v7
+
+      - name: Install pnpm and setup Node.js
+        uses: pnpm/setup@v1
+        with:
+          runtime: node@22
+          cache: true
+          install: false
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Check code
+        run: pnpm exec biome ci .
+
+  build:
+    name: Build app
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out the code
+        uses: actions/checkout@v7
+
+      - name: Install pnpm and setup Node.js
+        uses: pnpm/setup@v1
+        with:
+          runtime: node@v22
+          cache: true
+          install: false
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Build app
+        run: pnpm build
+
+  build-and-push:
+    if: >-
+      github.event_name == 'push' &&
+      github.ref == 'refs/heads/main'
+
+    name: Build & Push Docker Images
+    runs-on: ubuntu-latest
+    needs: [lint, build]
+
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+      - name: Check out the code
+        uses: actions/checkout@v7
+
+      - name: Log in to GitHub Container Registry
+        uses: docker/login-action@v4
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Setup Docker Buildx
+        uses: docker/setup-buildx-action@v4
+
+      - name: Build app image
+        uses: docker/build-push-action@v7
+        with:
+          context: .
+          file: containers/Dockerfile
+          load: true
+          push: false
+          tags: ghcr.io/kretostan/task-manager:${{ github.sha }}
+
+      - name: Docker smoke test
+        env:
+          IMAGE_SHA: ${{ github.sha }}
+        run: |
+          docker compose -p task-manager -f containers/compose.yaml -f containers/compose.ci.yaml up -d --wait --wait-timeout 90
+          curl --fail --max-time 5 http://localhost:8080/api/health
+
+      - name: Push app image
+        run: docker push ghcr.io/kretostan/task-manager:${{ github.sha }}
+
+      - name: Clean up
+        if: always()
+        env:
+          IMAGE_SHA: ${{ github.sha }}
+        run: docker compose -p task-manager -f containers/compose.yaml -f containers/compose.ci.yaml down

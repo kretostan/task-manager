@@ -1,0 +1,15 @@
+[Unit]
+Description=Task Manager
+
+[Container]
+Image=ghcr.io/kretostan/task-manager:__IMAGE_SHA__
+ContainerName=task-manager
+Network=proxy.network
+NetworkAlias=task-manager
+EnvironmentFile=/opt/apps/task-manager/.env
+
+[Service]
+Restart=always
+
+[Install]
+WantedBy=default.target
