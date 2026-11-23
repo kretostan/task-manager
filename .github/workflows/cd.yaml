@@ -68,9 +68,9 @@ jobs:
           key: ${{ secrets.SSH_KEY }}
           port: ${{ secrets.VPS_PORT }}
           fingerprint: ${{ secrets.SSH_FINGERPRINT }}
-          source: "containers/*"
+          source: "containers/*.container"
           target: ${{ secrets.DEPLOY_PATH }}
-          strip-components: 1
+          strip_components: 1
           overwrite: true
 
       - name: Deploy via SSH (Podman)
