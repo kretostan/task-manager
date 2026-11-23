@@ -6,6 +6,7 @@ RUN pnpm install --frozen-lockfile
 
 FROM deps AS dev
 WORKDIR /app
+ENV NEXT_TELEMETRY_DEBUG=1
 COPY . .
 CMD ["pnpm", "dev"]
 
@@ -16,6 +17,7 @@ RUN pnpm build
 
 FROM node:22-slim AS prod
 WORKDIR /app
+ENV NEXT_TELEMETRY_DEBUG=1
 ENV NODE_ENV=production
 ENV HOSTNAME=0.0.0.0
 COPY --from=build /app/.next/standalone ./
