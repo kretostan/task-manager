@@ -1,0 +1,16 @@
+services:
+  app:
+    build:
+      context: ..
+      dockerfile: containers/Dockerfile
+      target: dev
+    ports:
+      - "5173:3000"
+    env_file:
+      - ../.env
+    volumes:
+      - ../src:/app/src
+      - /app/node_modules
+    healthcheck:
+      test: ["CMD-SHELL", "exit 0"]
+      disable: true
