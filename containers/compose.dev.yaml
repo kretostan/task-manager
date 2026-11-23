@@ -8,9 +8,10 @@ services:
       - "5173:3000"
     env_file:
       - ../.env
+    environment:
+      - NODE_ENV=development
     volumes:
       - ../src:/app/src
-      - /app/node_modules
     healthcheck:
       test: ["CMD-SHELL", "exit 0"]
       disable: true
